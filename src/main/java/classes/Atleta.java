@@ -24,6 +24,14 @@ public class Atleta {
         this.tipo_esporte = Integer.parseInt(args[2]);
         this.habilidades = args[3];
     }
+    
+    public Atleta(String[] args) {
+        this.hash = args[0].hashCode();
+        this.idade = Integer.parseInt(args[1]);
+        this.nome = args[0];
+        this.tipo_esporte = Integer.parseInt(args[2]);
+        this.habilidades = args[3];
+    }
 
     public String getNome() {
         return nome;
