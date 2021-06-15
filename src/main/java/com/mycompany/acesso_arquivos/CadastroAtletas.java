@@ -2,6 +2,7 @@ package com.mycompany.acesso_arquivos;
 
 import classes.BalancedTree;
 import classes.BinaryTreePrinter;
+import classes.Atleta;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -59,20 +60,10 @@ public class CadastroAtletas {
 
         try {
             saida = new BufferedWriter(new FileWriter(file));
-            String[] atletas = tree.inOrder(tree.getRoot(), new ArrayList<>());
-            for (String atleta : atletas) {
-                
-                String [] atleta_detail = atleta.replace("[", "")
-                        .replace("]", "").split(",");
-
-                saida.write(atleta_detail[0].concat(";")
-                        .concat(atleta_detail[1].replace(" ", ""))
-                        .concat(";")
-                        .concat(atleta_detail[2].replace(" ", ""))
-                        .concat(";")
-                        .concat(atleta_detail[3]));
+            Atleta[] atletas = tree.inOrder(tree.getRoot(), new ArrayList<>());
+            for (Atleta atleta : atletas) {
+                saida.write(atleta.getConcatenedArgs());
                 saida.newLine();
-
             }
             saida.flush();
             saida.close();
