@@ -16,7 +16,7 @@ public class Node {
     private Node right;
     private Node father;
     
-private Atleta atleta;
+    private Atleta atleta;
     
     public Node(int value, Node left, Node right) {
         this.value = value;

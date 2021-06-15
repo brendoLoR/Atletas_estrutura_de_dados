@@ -11,7 +11,7 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class Acesso_arquivos {
+public class CadastroAtletas {
 
     static BalancedTree tree = new BalancedTree();
     static PrintStream ps = new PrintStream(System.out);
@@ -65,24 +65,24 @@ public class Acesso_arquivos {
                 String [] atleta_detail = atleta.replace("[", "")
                         .replace("]", "").split(",");
 
-                saida.write(atleta_detail[0].concat(",")
+                saida.write(atleta_detail[0].concat(";")
                         .concat(atleta_detail[1].replace(" ", ""))
-                        .concat(",")
+                        .concat(";")
                         .concat(atleta_detail[2].replace(" ", ""))
-                        .concat(",")
+                        .concat(";")
                         .concat(atleta_detail[3]));
                 saida.newLine();
 
             }
             saida.flush();
             saida.close();
-            tree.clear(0);
         } catch (IOException ex) {
-            Logger.getLogger(Acesso_arquivos.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CadastroAtletas.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     public static void atletaRead(String file) {
+        tree.clear(0);
         BufferedReader saida = null;
         try {
             if (new File(file).exists()) {
@@ -90,15 +90,15 @@ public class Acesso_arquivos {
                 String linha = saida.readLine();
                 while (linha != null) {
 //                    System.out.println(linha);
-                    tree.add(linha.split(","));
+                    tree.add(linha.split(";"));
                     linha = saida.readLine();
                 }
                 saida.close();
-                tPrinter.print(ps, tree.getRoot());
+                //tPrinter.print(ps, tree.getRoot());
             }
 
         } catch (Exception ex) {
-            Logger.getLogger(Acesso_arquivos.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CadastroAtletas.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -116,7 +116,7 @@ public class Acesso_arquivos {
             bw.close();
 
         } catch (IOException ex) {
-            Logger.getLogger(Acesso_arquivos.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CadastroAtletas.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -130,7 +130,7 @@ public class Acesso_arquivos {
             }
             br.close();
         } catch (IOException ex) {
-            Logger.getLogger(Acesso_arquivos.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CadastroAtletas.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
