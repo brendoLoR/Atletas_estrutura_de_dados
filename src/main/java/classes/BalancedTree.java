@@ -31,14 +31,14 @@ public class BalancedTree {
         return this.search(this.getRoot(), key);
     }
     
-    public String[] inOrder(Node node, List<String> aux){
+    public Atleta[] inOrder(Node node, List<Atleta> aux){
         if(node != null){
             this.inOrder(node.getLeft(), aux);
 //            aux.add(Arrays.toString(node.getAtleta().getArgs()));
-            aux.add(Arrays.toString(node.getAtleta().getArgs()));
+            aux.add(node.getAtleta());
             this.inOrder(node.getRight(), aux);
         }
-        return (String[])aux.toArray(new String[aux.size()]);
+        return (Atleta[])aux.toArray(new Atleta[aux.size()]);
     }
     
     public Integer[] beforeOrder(Node node, List<Integer> aux){

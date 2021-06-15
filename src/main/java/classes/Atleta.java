@@ -70,5 +70,18 @@ public class Atleta {
             String.valueOf(this.tipo_esporte), this.habilidades};
         return args;
     }
+    /*
+    @return String with all values of Atleta name;idade;tipo_esporte;habilidades
+    
+    
+    */
+    public String getConcatenedArgs(){
+        return (this.nome.concat(";")
+                        .concat(String.valueOf(this.idade))
+                        .concat(";")
+                        .concat(String.valueOf(this.tipo_esporte))
+                        .concat(";")
+                        .concat(this.habilidades));
+    }
 
 }
