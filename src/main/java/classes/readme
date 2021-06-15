@@ -1,0 +1,3 @@
+data structure for Atletas:
+
+[String name, String numeric_age, String numeric_tipo_esporte, String habilidades]
