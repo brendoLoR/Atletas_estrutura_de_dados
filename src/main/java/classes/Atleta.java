@@ -10,13 +10,14 @@ package classes;
  * @author brendoja
  */
 public class Atleta {
+
     private int hash;
     private String nome;
     private int idade;
     private int tipo_esporte;
     private String habilidades;
-    
-    public Atleta(String[] args, int hash){
+
+    public Atleta(String[] args, int hash) {
         this.hash = hash;
         this.idade = Integer.parseInt(args[1]);
         this.nome = args[0];
@@ -63,10 +64,11 @@ public class Atleta {
     public void setHash(int hash) {
         this.hash = hash;
     }
-    public String[] getArgs(){
+
+    public String[] getArgs() {
         String[] args = {this.nome, String.valueOf(this.idade),
             String.valueOf(this.tipo_esporte), this.habilidades};
         return args;
     }
-    
+
 }
