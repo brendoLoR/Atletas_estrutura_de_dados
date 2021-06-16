@@ -10,7 +10,7 @@ package classes;
  * @author brendoja
  */
 public class Node {
-    private int value;
+    private int hash_id;
     private int Height;
     private Node left;
     private Node right;
@@ -18,22 +18,30 @@ public class Node {
     
     private Atleta atleta;
     
-    public Node(int value, Node left, Node right) {
-        this.value = value;
+    public Node(int hash_id, Node left, Node right) {
+        this.hash_id = hash_id;
         this.left = left;
         this.right = right;
     }
     
-    public Node(int value, String[] args) {
-        this.value = value;
+    public Node(int hash_id, String[] args) {
+        this.hash_id = hash_id;
         this.left = null;
         this.right = null;
         
         this.setAtleta(args);
     }
 
-    public int getValue() {
-        return value;
+    public Node(int hash_id, Atleta atleta) {
+        this.hash_id = hash_id;
+        this.left = null;
+        this.right = null;
+        
+        this.atleta = atleta;
+    }
+    
+    public int getHash_id() {
+        return hash_id;
     }
     
     public Node getLeft() {
@@ -44,8 +52,8 @@ public class Node {
         return right;
     }
 
-    public void setValue(int value) {
-        this.value = value;
+    public void setHash_id(int hash_id) {
+        this.hash_id = hash_id;
     }
 
     public void setLeft(Node left) {
@@ -77,6 +85,6 @@ public class Node {
     }
 
     private void setAtleta(String[] args) {
-        this.atleta = new Atleta(args, this.getValue());
+        this.atleta = new Atleta(args, this.getHash_id());
     }
 }
