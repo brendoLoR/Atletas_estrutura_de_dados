@@ -56,7 +56,7 @@ public class CadastroAtletas {
 			try {
 
 				String[] atleta = new String[4];
-				ps.println("ATLETA Nº " + i + "\n");
+				ps.println("ATLETA Nº " + (i + 1) + "\n");
 				ps.println("NOME: ");
 				atleta[0] = scan.nextLine();
 //				atleta[0] = "brendo" + rand.nextInt(99999);
@@ -76,31 +76,59 @@ public class CadastroAtletas {
 				i--;
 			}
 		}
-		
 /*
 		for (Atleta a : db.atletas) {
 			ps.println(a.getConcatenedArgs());
 		}
-
+*/
 		db.add(atletas);
 		db.save();
-		ps.println();
-		ps.println();
-		ps.println();
-
-		for (Atleta a : db.atletas) {
-			ps.println(a.getConcatenedArgs());
-		}
+		ps.print("Cadastro realizado com sucesso!");
 
 		ps.println();
 		ps.println();
 		ps.println();
 		
-		Atleta[] b = Ordenador.quicksort(db.atletas, 0, db.atletas.length);
-	for (Atleta natleta : db.atletas) {
-			ps.println(natleta.getConcatenedArgs());
+		//Lista
+		for (Atleta a : db.atletas) {
+			ps.println(a.getConcatenedArgs());
 		}
-*/
+		
+		
+		ps.println();
+		ps.println();
+		ps.println();
+		
+		//Lista Ordenada QUICKSORT
+		ps.println("QuickSort");
+			
+		Atleta[] b = Ordenador.quicksort(db.atletas, 0, db.atletas.length);
+		for (Atleta qAtletas : db.atletas) {
+			ps.println(qAtletas.getConcatenedArgs());
+		}
+		
+		ps.println();
+		ps.println();
+		ps.println();
+		//Lista Ordenada SelectionSort
+		ps.println("SelectionSort");
+		
+		Atleta[] c = Ordenador.SelectionSort(db.atletas, db.atletas.length);
+		for (Atleta sAtletas : db.atletas) {
+			ps.println(sAtletas.getConcatenedArgs());
+		}
+		
+		ps.println();
+		ps.println();
+		ps.println();
+		
+		//Lista Ordenada InsertionSort
+		ps.println("InsertionSort");
+
+		Atleta[] d = Ordenador.insertionSort(db.atletas);
+		for (Atleta iAtletas : db.atletas) {
+			ps.println(iAtletas.getConcatenedArgs());
+		}
 
 		db.close();
 
