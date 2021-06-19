@@ -35,73 +35,75 @@ import java.util.Scanner;
 
 public class CadastroAtletas {
 
-    static PrintStream ps = new PrintStream(System.out);
-    static BinaryTreePrinter tPrinter = new BinaryTreePrinter();
+	static PrintStream ps = new PrintStream(System.out);
+	static BinaryTreePrinter tPrinter = new BinaryTreePrinter();
 
-    static String database = "atletas.dat";
-    static Persistencia db = new Persistencia(database);
+	static String database = "atletas.dat";
+	static Persistencia db = new Persistencia(database);
 
-    @SuppressWarnings("empty-statement")
-    public static void main(String args[]) {
+	@SuppressWarnings("empty-statement")
+	public static void main(String args[]) {
 
-        db.open_to_AtletaArray();
+		db.open_to_AtletaArray();
 
-        Random rand = new Random();
-        Scanner scan = new Scanner(System.in);
-        ps.println("insira a quantidade de atletas para cadastro: ");
-        int nums = Integer.parseInt(scan.nextLine());
+		Random rand = new Random();
+		Scanner scan = new Scanner(System.in);
+		ps.println("insira a quantidade de atletas para cadastro: ");
+		int nums = Integer.parseInt(scan.nextLine());
 
-        Atleta[] atletas = new Atleta[nums];
-        for (int i = 0; i < nums; i++) {
-            try {
+		Atleta[] atletas = new Atleta[nums];
+		for (int i = 0; i < nums; i++) {
+			try {
 
-                String[] atleta = new String[4];
-                ps.println("ATLETA Nº " + i + "\n");
-                ps.println("NOME: ");
-//                atleta[0] = scan.nextLine();
-                atleta[0] = "brendo" + rand.nextInt(99999);
+				String[] atleta = new String[4];
+				ps.println("ATLETA Nº " + i + "\n");
+				ps.println("NOME: ");
+				atleta[0] = scan.nextLine();
+//				atleta[0] = "brendo" + rand.nextInt(99999);
 
-                ps.println("IDADE: ");
-//                atleta[1] = String.valueOf(Integer.parseInt(scan.nextLine()));
-                atleta[1] = String.valueOf(rand.nextInt(99999));
-                ps.println("ESPORTE: ");
-//                atleta[2] = scan.nextLine();
-                atleta[2] = "esporte";
-                ps.println("HABILIDADES: ");
-//                atleta[3] = scan.nextLine();
-                atleta[3] = "sei jogar de tudo";
+				ps.println("IDADE: ");
+				atleta[1] = String.valueOf(Integer.parseInt(scan.nextLine()));
+//                atleta[1] = String.valueOf(rand.nextInt(99999));
+				ps.println("ESPORTE: ");
+				atleta[2] = scan.nextLine();
+//                atleta[2] = "esporte";
+				ps.println("HABILIDADES: ");
+				atleta[3] = scan.nextLine();
+//                atleta[3] = "sei jogar de tudo";
 
-                atletas[i] = new Atleta(atleta);
-            } catch (Exception e) {
-                i--;
-            }
-        }
+				atletas[i] = new Atleta(atleta);
+			} catch (Exception e) {
+				i--;
+			}
+		}
+		
+/*
+		for (Atleta a : db.atletas) {
+			ps.println(a.getConcatenedArgs());
+		}
 
-        for (Atleta a : db.atletas) {
-            ps.println(a.getConcatenedArgs());
-        }
+		db.add(atletas);
+		db.save();
+		ps.println();
+		ps.println();
+		ps.println();
 
-        db.add(atletas);
-        db.save();
-        ps.println();
-        ps.println();
-        ps.println();
+		for (Atleta a : db.atletas) {
+			ps.println(a.getConcatenedArgs());
+		}
 
-        for (Atleta a : db.atletas) {
-            ps.println(a.getConcatenedArgs());
-        }
+		ps.println();
+		ps.println();
+		ps.println();
+		
+		Atleta[] b = Ordenador.quicksort(db.atletas, 0, db.atletas.length);
+	for (Atleta natleta : db.atletas) {
+			ps.println(natleta.getConcatenedArgs());
+		}
+*/
 
-        ps.println();
-        ps.println();
-        ps.println();
+		db.close();
 
-        Atleta[] b = Ordenador.quicksort(db.atletas, 0, db.atletas.length);
-        for (Atleta natleta : db.atletas) {
-            ps.println(natleta.getConcatenedArgs());
-        }
-
-        db.close();
-
-    }
+	}
 
 }
