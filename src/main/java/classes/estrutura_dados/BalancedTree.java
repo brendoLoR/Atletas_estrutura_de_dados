@@ -235,5 +235,24 @@ public class BalancedTree {
         this.root.setRight(null);
         this.root.setHash_id(v);
     }
+    
+    /**
+     * 
+     * @param hashName
+     * @param new_arg
+     * @param position
+     * @return 
+     */
+    public Boolean update_atleta(int hashName, String new_arg, int position) {
+        try{
+            Atleta atleta = this.remove(this.getRoot(), hashName).getAtleta();
+            String[] agrs = atleta.getArgs();
+            agrs[position] = new_arg;
+            this.add(agrs);
+            return true;
+        }catch (Exception e){
+            return false;
+        }
+    }
 
 }
