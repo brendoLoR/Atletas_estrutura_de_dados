@@ -96,11 +96,10 @@ public class Atleta {
             String.valueOf(this.tipo_esporte), this.habilidades};
         return args;
     }
-    /*
-    @return String with all values of Atleta name;idade;tipo_esporte;habilidades
-    
-    
-    */
+    /**
+     * 
+     * @return String with all values of Atleta name;idade;tipo_esporte;habilidades 
+     */
     public String getConcatenedArgs(){
         return (this.nome.concat(";")
                         .concat(String.valueOf(this.idade))
@@ -109,5 +108,16 @@ public class Atleta {
                         .concat(";")
                         .concat(this.habilidades));
     }
-
+    public void set_by_position(String arg, int position){
+        switch (position){
+            case 0:
+                this.setNome(arg);
+            case 1:
+                this.setIdade(Integer.parseInt(arg));
+            case 2:
+                this.setTipo_esporte(Integer.parseInt(arg));
+            case 3:
+                this.setHabilidades(arg);
+        }
+    }
 }
