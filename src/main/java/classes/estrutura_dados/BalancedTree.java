@@ -44,6 +44,11 @@ public class BalancedTree {
             this.setRoot(add(this.getRoot(), key_value, atleta));
         }
     }
+    
+    public void add(Atleta atleta) {
+        int key_value = atleta.getHash();
+        this.setRoot(add(this.getRoot(), key_value, atleta));
+    }
 
     public void add(String[] atleta_str) {
         int key_value = this.getKey(atleta_str[0]);

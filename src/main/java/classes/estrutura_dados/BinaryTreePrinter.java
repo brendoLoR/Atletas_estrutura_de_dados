@@ -33,8 +33,8 @@ import java.util.Arrays;
 public class BinaryTreePrinter {
     private Node tree;
     
-    public BinaryTreePrinter(Node tree){
-        this.tree = tree;
+    public BinaryTreePrinter(){
+        this.tree = null;
     }
     public void traversePreOrder(StringBuilder sb, Node node) {
         if (node != null) {

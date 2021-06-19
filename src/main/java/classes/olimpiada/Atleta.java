@@ -32,14 +32,14 @@ public class Atleta {
     private int hash;
     private String nome;
     private int idade;
-    private int tipo_esporte;
+    private String tipo_esporte;
     private String habilidades;
 
     public Atleta(String[] args, int hash) {
         this.hash = hash;
         this.idade = Integer.parseInt(args[1]);
         this.nome = args[0];
-        this.tipo_esporte = Integer.parseInt(args[2]);
+        this.tipo_esporte = args[2];
         this.habilidades = args[3];
     }
     
@@ -47,7 +47,7 @@ public class Atleta {
         this.hash = args[0].hashCode();
         this.idade = Integer.parseInt(args[1]);
         this.nome = args[0];
-        this.tipo_esporte = Integer.parseInt(args[2]);
+        this.tipo_esporte = args[2];
         this.habilidades = args[3];
     }
 
@@ -59,7 +59,7 @@ public class Atleta {
         return idade;
     }
 
-    public int getTipo_esporte() {
+    public String getTipo_esporte() {
         return tipo_esporte;
     }
 
@@ -75,7 +75,7 @@ public class Atleta {
         this.idade = idade;
     }
 
-    public void setTipo_esporte(int tipo_esporte) {
+    public void setTipo_esporte(String tipo_esporte) {
         this.tipo_esporte = tipo_esporte;
     }
 
@@ -93,7 +93,7 @@ public class Atleta {
 
     public String[] getArgs() {
         String[] args = {this.nome, String.valueOf(this.idade),
-            String.valueOf(this.tipo_esporte), this.habilidades};
+            this.tipo_esporte, this.habilidades};
         return args;
     }
     /**
@@ -104,7 +104,7 @@ public class Atleta {
         return (this.nome.concat(";")
                         .concat(String.valueOf(this.idade))
                         .concat(";")
-                        .concat(String.valueOf(this.tipo_esporte))
+                        .concat(this.tipo_esporte)
                         .concat(";")
                         .concat(this.habilidades));
     }
@@ -115,7 +115,7 @@ public class Atleta {
             case 1:
                 this.setIdade(Integer.parseInt(arg));
             case 2:
-                this.setTipo_esporte(Integer.parseInt(arg));
+                this.setTipo_esporte(arg);
             case 3:
                 this.setHabilidades(arg);
         }
