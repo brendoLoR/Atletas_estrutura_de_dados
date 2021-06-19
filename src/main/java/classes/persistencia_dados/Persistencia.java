@@ -58,11 +58,11 @@ public class Persistencia {
                 this.tree.addMultAtletas(TraitFiles.atletaRead(this.getDatabase()));
                 this.treeStatus = true;
             } else if (this.treeStatus && !this.arrayStatus) {
-                TraitFiles.atletaGenerate(this.getDatabase(), this.getTree().inOrder(getTree().getRoot(), new ArrayList<>()));
+                this.save();
                 this.tree.addMultAtletas(TraitFiles.atletaRead(this.getDatabase()));
                 this.treeStatus = true;
             } else if (this.arrayStatus && !this.treeStatus) {
-                TraitFiles.atletaGenerate(this.getDatabase(), this.getAtletas());
+                this.save();
                 this.atletas = null;
                 this.tree.addMultAtletas(TraitFiles.atletaRead(this.getDatabase()));
                 this.treeStatus = true;
@@ -103,6 +103,24 @@ public class Persistencia {
         return this.getTreeStatus();
     }
 
+    public void close() {
+        try {
+            if (this.arrayStatus) {
+                this.save();
+                this.atletas = null;
+                this.arrayStatus = false;
+            } else if (this.treeStatus) {
+                this.save();
+                this.tree = null;
+                this.treeStatus = false;
+            } else {
+                System.out.println("you need to start the transaction before");
+            }
+        } catch (Exception e) {
+            System.out.println("erro ao salvar");
+        }
+    }
+
     /**
      * you need to use try{}catch(Exception e){}
      *
@@ -125,15 +143,24 @@ public class Persistencia {
         }
     }
 
+    /**
+     *
+     * @return true se tudo for ok
+     */
     public Boolean save() {
-        if (this.arrayStatus) {
-            TraitFiles.atletaGenerate(this.database, this.atletas);
-            return true;
-        } else if (this.treeStatus) {
-            TraitFiles.atletaGenerate(this.database, tree.inOrder(tree.getRoot(), new ArrayList<>()));
-            return true;
-        } else {
-            System.out.println("you need to start the transation before");
+        try {
+            if (this.arrayStatus) {
+                TraitFiles.atletaGenerate(this.database, this.atletas);
+                return true;
+            } else if (this.treeStatus) {
+                TraitFiles.atletaGenerate(this.database, tree.inOrder(tree.getRoot(), new ArrayList<>()));
+                return true;
+            } else {
+                System.out.println("you need to start the transaction before");
+                return false;
+            }
+        } catch (Exception e) {
+            System.out.println("erro ao salvar");
             return false;
         }
     }
@@ -163,9 +190,9 @@ public class Persistencia {
     }
 
     /**
-     * 
+     *
      * @param name
-     * @return 
+     * @return
      */
     public Boolean remove(String name) {
         int hashName = name.hashCode();
@@ -176,7 +203,7 @@ public class Persistencia {
             for (int i = 0; i < this.atletas.length; i++) {
                 if (atletas[i].getHash() == hashName) {
                     atletas[i] = null;
-                    return this.save() ? this.open_to_AtletaArray(): false;                   
+                    return this.save() ? this.open_to_AtletaArray() : false;
                 }
             }
             System.out.println("name not found");
