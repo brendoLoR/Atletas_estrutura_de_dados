@@ -30,11 +30,11 @@ import classes.olimpiada.Atleta;
  * @author brendoja
  */
 public class Ordenador {
-    
-    public Ordenador(){
-        
+
+    public Ordenador() {
+
     }
-    
+
     /**
      *
      * @param atletas Atleta[]
@@ -109,5 +109,18 @@ public class Ordenador {
         }
         return atleta;
     }
-    
+
+    public static Atleta[] buubleSort(Atleta[] atletas) {
+        for (int i = 0; i < atletas.length; i++) {
+            for (int j = 0; j < atletas.length - 1; j++) {
+                if (atletas[j].getHash() > atletas[j + 1].getHash()) {
+                    Atleta aux = atletas[j];
+                    atletas[j] = atletas[j + 1];
+                    atletas[j + 1] = aux;
+                }
+            }
+        }
+        return atletas;
+    }
+
 }

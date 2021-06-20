@@ -1,6 +1,6 @@
 data structure for Atletas:
 
-[String name, String numeric_age, String numeric_tipo_esporte, String habilidades, int metrica]
+[String name, String numeric_age, String tipo_esporte, String habilidades]
 
 data structure for tipo_esportes
 [int id, String espor_name, String attr]
