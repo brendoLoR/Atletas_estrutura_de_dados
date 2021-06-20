@@ -24,7 +24,7 @@
 package classes.persistencia_dados.tratamento_arquivos;
 
 import classes.olimpiada.Atleta;
-import com.mycompany.cadastros.CadastroAtletas;
+import com.mycompany.cadastros.Menu;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -59,13 +59,15 @@ public class TraitFiles {
             saida = new BufferedWriter(new FileWriter(file));
 
             for (Atleta atleta : atletas) {
-                saida.write(atleta.getConcatenedArgs());
-                saida.newLine();
+                if (atleta != null) {
+                    saida.write(atleta.getConcatenedArgs());
+                    saida.newLine();
+                }
             }
             saida.flush();
             saida.close();
         } catch (IOException ex) {
-            Logger.getLogger(CadastroAtletas.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -91,7 +93,7 @@ public class TraitFiles {
             }
 
         } catch (Exception ex) {
-            Logger.getLogger(CadastroAtletas.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
         }
         return (Atleta[]) atletas.toArray(new Atleta[atletas.size()]);
     }

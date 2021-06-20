@@ -32,22 +32,23 @@ public class Atleta {
     private int hash;
     private String nome;
     private int idade;
-    private String tipo_esporte;
+    private String tipo_esporte = "BASQUETE";
     private String habilidades;
+    private int qtd_pontos;
 
     public Atleta(String[] args, int hash) {
         this.hash = hash;
-        this.idade = Integer.parseInt(args[1]);
         this.nome = args[0];
-        this.tipo_esporte = args[2];
+        this.idade = Integer.parseInt(args[1]);
+        this.qtd_pontos = Integer.parseInt(args[2]);
         this.habilidades = args[3];
     }
-    
+
     public Atleta(String[] args) {
         this.hash = args[0].hashCode();
-        this.idade = Integer.parseInt(args[1]);
         this.nome = args[0];
-        this.tipo_esporte = args[2];
+        this.idade = Integer.parseInt(args[1]);
+        this.qtd_pontos = Integer.parseInt(args[2]);
         this.habilidades = args[3];
     }
 
@@ -92,32 +93,59 @@ public class Atleta {
     }
 
     public String[] getArgs() {
-        String[] args = {this.nome, String.valueOf(this.idade),
-            this.tipo_esporte, this.habilidades};
+        String[] args = {
+            this.nome,
+            String.valueOf(this.idade),
+            String.valueOf(this.qtd_pontos),
+            this.habilidades,
+            this.tipo_esporte
+        };
         return args;
     }
+
     /**
-     * 
-     * @return String with all values of Atleta name;idade;tipo_esporte;habilidades 
+     *
+     * @return String with all values of Atleta
+     * name;idade;tipo_esporte;qtd_pontos;habilidades
      */
-    public String getConcatenedArgs(){
+    public String getConcatenedArgs() {
         return (this.nome.concat(";")
-                        .concat(String.valueOf(this.idade))
-                        .concat(";")
-                        .concat(this.tipo_esporte)
-                        .concat(";")
-                        .concat(this.habilidades));
+                .concat(String.valueOf(this.idade))
+                .concat(";")
+                .concat(String.valueOf(this.qtd_pontos))
+                .concat(";")
+                .concat(this.habilidades)
+                .concat(";")
+                .concat(this.tipo_esporte));
     }
-    public void set_by_position(String arg, int position){
-        switch (position){
+
+    public void set_by_position(String arg, int position) {
+        switch (position) {
             case 0:
                 this.setNome(arg);
             case 1:
                 this.setIdade(Integer.parseInt(arg));
             case 2:
-                this.setTipo_esporte(arg);
+                this.setQtd_pontos(Integer.parseInt(arg));
             case 3:
                 this.setHabilidades(arg);
+            case 4:
+                this.setTipo_esporte("BASQUETE");
+                
         }
+    }
+
+    /**
+     * @return the qtd_pontos
+     */
+    public int getQtd_pontos() {
+        return qtd_pontos;
+    }
+
+    /**
+     * @param qtd_pontos the qtd_pontos to set
+     */
+    public void setQtd_pontos(int qtd_pontos) {
+        this.qtd_pontos = qtd_pontos;
     }
 }
