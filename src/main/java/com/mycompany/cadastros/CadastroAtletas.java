@@ -35,103 +35,144 @@ import java.util.Scanner;
 
 public class CadastroAtletas {
 
-	static PrintStream ps = new PrintStream(System.out);
-	static BinaryTreePrinter tPrinter = new BinaryTreePrinter();
+    //inicializa arvore e printer
+    static PrintStream ps = new PrintStream(System.out);
+    static BinaryTreePrinter tPrinter = new BinaryTreePrinter();
+    //inicializa convesação com base de dados
+    static String database = "atletas.dat";
+    static Persistencia db = new Persistencia(database);
+    //utilidades
+    static Scanner scan = new Scanner(System.in);
+    static Random rand = new Random();
+    static Boolean array_tree = false;
 
-	static String database = "atletas.dat";
-	static Persistencia db = new Persistencia(database);
+    @SuppressWarnings("empty-statement")
+    public static void main(String args[]) {
+        Boolean saida = false;
+        clear();
+        ps.println("-------------------------------------------------------\n\n"
+                + "ATENÇÃO - Esse programa pode ser usado de duas maneiras.\n"
+                + "1º -> Armazenando os dados em uma arvore balanceada;\n"
+                + "2º -> Armazenando os dados em um array\n"
+                + "\n\n"
+                + "OBS: Os metodos de ordenação só estarão disponiveis no modo Array\n\n"
+                + "-------------------------------------------------------");
 
-	@SuppressWarnings("empty-statement")
-	public static void main(String args[]) {
+        if (continuar()) {
+            ps.println("Escolha o tipo de lista: \n"
+                    + "0 - Arvore Binaria;"
+                    + "1 - Array de atletas (permite ordenação)");
+            array_tree = scan.nextLine().equals("1");
+        } else {
+            System.exit(0);
+        }
+        db.open_to_AtletaArray();
+        do {
+            clear();
+            ps.println("-------------------------------------------------------\n"
+                    + " - Escolha uma opção abaixo: \n"
+                    + "0. Criar uma sequencia aleatoria de atletas \n"
+                    + "1. Inserir manualmente os atletas \n"
+                    + "2. Apagar um aleta da lista \n"
+                    + "3. Buscar um atleta \n"
+                    + "4. Imprimir todos os atletas cadastrados \n"
+            );
 
-		db.open_to_AtletaArray();
+            ps.println(menuDetail(array_tree)
+                    + "9. SAIR \n" + "--------------------------------------------------------");
 
-		Random rand = new Random();
-		Scanner scan = new Scanner(System.in);
-		ps.println("insira a quantidade de atletas para cadastro: ");
-		int nums = Integer.parseInt(scan.nextLine());
+            saida = options(scan.nextInt());
+        } while (saida);
 
-		Atleta[] atletas = new Atleta[nums];
-		for (int i = 0; i < nums; i++) {
-			try {
+    }
 
-				String[] atleta = new String[4];
-				ps.println("ATLETA Nº " + (i + 1) + "\n");
-				ps.println("NOME: ");
-				atleta[0] = scan.nextLine();
-//				atleta[0] = "brendo" + rand.nextInt(99999);
+    static Boolean options(int opt) {
+        switch (opt) {
+            case 0 -> {
+                //0. Criar uma nova arvore e, se existir, apagar a atual
 
-				ps.println("IDADE: ");
-				atleta[1] = String.valueOf(Integer.parseInt(scan.nextLine()));
-//                atleta[1] = String.valueOf(rand.nextInt(99999));
-				ps.println("ESPORTE: ");
-				atleta[2] = scan.nextLine();
-//                atleta[2] = "esporte";
-				ps.println("HABILIDADES: ");
-				atleta[3] = scan.nextLine();
-//                atleta[3] = "sei jogar de tudo";
+                ps.println("insira a quantidade de atletas aleatorios: ");
+                int nums = scan.nextInt();
+                Atleta[] atletas = new Atleta[nums];
+                for (int i = 0; i < nums - 1; i++) {
+                    try {
+                        String[] atleta = new String[4];
+                        atleta[0] = "brendo" + rand.nextInt(99999);
+                        atleta[1] = String.valueOf(rand.nextInt(99999));
+                        atleta[2] = "esporte";
+                        atleta[3] = "sei jogar de tudo";
 
-				atletas[i] = new Atleta(atleta);
-			} catch (Exception e) {
-				i--;
-			}
-		}
-/*
-		for (Atleta a : db.atletas) {
-			ps.println(a.getConcatenedArgs());
-		}
-*/
-		db.add(atletas);
-		db.save();
-		ps.print("Cadastro realizado com sucesso!");
+                        atletas[i] = new Atleta(atleta);
+                    } catch (Exception e) {
+                        i--;
+                    }
+                }
+                db.add(atletas);
+                return continuar();
+            }
+            case 1 -> {
+                ps.println("insira a quantidade de atletas para cadastro: ");
+                int nums = Integer.parseInt(scan.nextLine());
 
-		ps.println();
-		ps.println();
-		ps.println();
-		
-		//Lista
-		for (Atleta a : db.atletas) {
-			ps.println(a.getConcatenedArgs());
-		}
-		
-		
-		ps.println();
-		ps.println();
-		ps.println();
-		
-		//Lista Ordenada QUICKSORT
-		ps.println("QuickSort");
-			
-		Atleta[] b = Ordenador.quicksort(db.atletas, 0, db.atletas.length);
-		for (Atleta qAtletas : db.atletas) {
-			ps.println(qAtletas.getConcatenedArgs());
-		}
-		
-		ps.println();
-		ps.println();
-		ps.println();
-		//Lista Ordenada SelectionSort
-		ps.println("SelectionSort");
-		
-		Atleta[] c = Ordenador.SelectionSort(db.atletas, db.atletas.length);
-		for (Atleta sAtletas : db.atletas) {
-			ps.println(sAtletas.getConcatenedArgs());
-		}
-		
-		ps.println();
-		ps.println();
-		ps.println();
-		
-		//Lista Ordenada InsertionSort
-		ps.println("InsertionSort");
+                Atleta[] atletas = new Atleta[nums];
+                for (int i = 0; i < nums; i++) {
+                    try {
 
-		Atleta[] d = Ordenador.insertionSort(db.atletas);
-		for (Atleta iAtletas : db.atletas) {
-			ps.println(iAtletas.getConcatenedArgs());
-		}
+                        String[] atleta = new String[4];
+                        ps.println("ATLETA Nº " + (i + 1) + "\n");
+                        ps.println("NOME: ");
+                        atleta[0] = scan.nextLine();
+                        ps.println("IDADE: ");
+                        atleta[1] = String.valueOf(Integer.parseInt(scan.nextLine()));
+                        ps.println("ESPORTE: ");
+                        atleta[2] = scan.nextLine();
+                        ps.println("HABILIDADES: ");
+                        atleta[3] = scan.nextLine();
 
-		db.close();
+                        atletas[i] = new Atleta(atleta);
+                    } catch (Exception e) {
+                        i--;
+                    }
+                }
+                db.add(atletas);
 
-	}
+                return continuar();
+            }
 
+            case 9 -> {
+
+            }
+        }
+        return continuar();
+    }
+
+    static String menuDetail(Boolean array_tree) {
+        if (array_tree) {
+            return "5 - QuickSort\n"
+                    + "6 - InsertionSort"
+                    + "7 - SelectionSort"
+                    + "8 - BuubleSort";
+        } else {
+            return "";
+        }
+    }
+
+    static Boolean continuar() {
+        ps.println("\ndeseja continuar? y/n");
+        return scan.next().equals("y");
+    }
+
+    static void clear() {
+        try {
+            if (System.getProperty("os.name").contains("Windows")) {
+                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+            } else {
+                Runtime.getRuntime().exec("clear");
+            }
+
+        } catch (Exception e) {
+
+        }
+
+    }
 }
